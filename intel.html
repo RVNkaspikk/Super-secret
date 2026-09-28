@@ -1,226 +1,495 @@
 <!DOCTYPE html>
 <html lang="cs">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>CS2Skins — Case Shop</title>
 
-  <title>Ræven — Vstup</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
 
-  <meta
-    name="description"
-    content="Ræven — soukromá komunita. Získej přístup za 50 Kč."
-  >
+body{
+    font-family:Arial,Helvetica,sans-serif;
+    background:#07090d;
+    color:#fff;
+    min-height:100vh;
+}
 
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
+header{
+    height:72px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 6%;
+    background:#0c0f15;
+    border-bottom:1px solid #20242c;
+    position:sticky;
+    top:0;
+    z-index:10;
+}
+
+.logo{
+    font-size:25px;
+    font-weight:900;
+    letter-spacing:-1px;
+}
+
+.logo span{color:#ff8a00}
+
+nav{
+    display:flex;
+    gap:25px;
+}
+
+nav a{
+    color:#aaa;
+    text-decoration:none;
+    font-size:14px;
+}
+
+nav a:hover{color:white}
+
+.balance{
+    background:#151a22;
+    border:1px solid #292f39;
+    padding:10px 15px;
+    border-radius:9px;
+    color:#ffb347;
+    font-weight:bold;
+}
+
+.hero{
+    padding:70px 6% 35px;
+    text-align:center;
+    background:
+        radial-gradient(circle at center,
+        rgba(255,128,0,.14),
+        transparent 45%);
+}
+
+.hero h1{
+    font-size:clamp(40px,7vw,75px);
+    margin-bottom:15px;
+}
+
+.hero h1 span{color:#ff8500}
+
+.hero p{
+    color:#888f9b;
+    max-width:600px;
+    margin:auto;
+    line-height:1.6;
+}
+
+.container{
+    width:88%;
+    max-width:1200px;
+    margin:40px auto;
+}
+
+.section-title{
+    font-size:24px;
+    margin-bottom:20px;
+}
+
+.cases{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.case{
+    background:linear-gradient(145deg,#11161e,#0c1016);
+    border:1px solid #252c37;
+    border-radius:15px;
+    padding:20px;
+    text-align:center;
+    transition:.25s;
+}
+
+.case:hover{
+    transform:translateY(-5px);
+    border-color:#ff8500;
+    box-shadow:0 15px 40px rgba(255,120,0,.1);
+}
+
+.case-img{
+    height:170px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:90px;
+    background:
+        radial-gradient(circle,#252b35,transparent 65%);
+    margin-bottom:15px;
+}
+
+.case h3{
+    margin-bottom:8px;
+}
+
+.case p{
+    color:#777f8c;
+    font-size:13px;
+    margin-bottom:15px;
+}
+
+.price{
+    color:#ffad4d;
+    font-weight:bold;
+    margin-bottom:14px;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    color:white;
+    background:linear-gradient(135deg,#ff9700,#e55d00);
+    padding:12px 20px;
+    border-radius:8px;
+    font-weight:bold;
+    width:100%;
+}
+
+button:hover{
+    filter:brightness(1.12);
+}
+
+.inventory{
+    margin-top:70px;
+}
+
+.inventory-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:15px;
+}
+
+.item{
+    background:#10141b;
+    border:1px solid #252b34;
+    padding:18px;
+    border-radius:12px;
+    text-align:center;
+}
+
+.item-icon{
+    font-size:55px;
+    margin-bottom:10px;
+}
+
+.item small{
+    color:#737b88;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+}
+
+.modal.active{display:flex}
+
+.modal-box{
+    width:min(700px,92%);
+    background:#10141b;
+    border:1px solid #303744;
+    border-radius:18px;
+    padding:25px;
+    text-align:center;
+}
+
+.roulette{
+    height:150px;
+    overflow:hidden;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding:20px;
+    margin:20px 0;
+    background:#080b10;
+    border-radius:12px;
+}
+
+.roulette-item{
+    min-width:130px;
+    height:105px;
+    background:#171d26;
+    border:1px solid #343c49;
+    border-radius:9px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    font-size:42px;
+}
+
+.roulette-item span{
+    font-size:11px;
+    color:#aaa;
+    margin-top:5px;
+}
+
+.close{
+    background:#292f39;
+    margin-top:10px;
+}
+
+footer{
+    margin-top:80px;
+    padding:30px;
+    text-align:center;
+    color:#555d68;
+    border-top:1px solid #1d222a;
+}
+
+@media(max-width:700px){
+    nav{display:none}
+
+    header{
+        padding:0 20px;
     }
 
-    :root {
-      --bg: #07070a;
-      --card: #111116;
-      --orange: #ff6a00;
-      --orange-light: #ff9a3d;
-      --text: #ffffff;
-      --muted: #9999a3;
-      --border: rgba(255,255,255,.08);
+    .container{
+        width:92%;
     }
-
-    body {
-      min-height: 100vh;
-      font-family: Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at 50% 20%, rgba(255,106,0,.15), transparent 35%),
-        radial-gradient(circle at 80% 80%, rgba(116,0,255,.08), transparent 30%),
-        var(--bg);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 25px;
-      overflow-x: hidden;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 520px;
-      text-align: center;
-    }
-
-    .logo {
-      width: 110px;
-      height: 110px;
-      margin: 0 auto 25px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-
-      background:
-        linear-gradient(145deg, #ff7a00, #c63f00);
-
-      box-shadow:
-        0 0 40px rgba(255,106,0,.25),
-        inset 0 0 25px rgba(0,0,0,.25);
-
-      font-size: 55px;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 7px 13px;
-      border: 1px solid rgba(255,106,0,.3);
-      background: rgba(255,106,0,.08);
-      color: var(--orange-light);
-      border-radius: 999px;
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    h1 {
-      font-size: clamp(42px, 12vw, 72px);
-      line-height: .95;
-      letter-spacing: -3px;
-      margin-bottom: 18px;
-    }
-
-    h1 span {
-      color: var(--orange);
-    }
-
-    .description {
-      color: var(--muted);
-      line-height: 1.7;
-      font-size: 16px;
-      max-width: 430px;
-      margin: 0 auto 30px;
-    }
-
-    .card {
-      background: rgba(17,17,22,.86);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 28px;
-      backdrop-filter: blur(15px);
-      box-shadow: 0 25px 80px rgba(0,0,0,.45);
-    }
-
-    .price {
-      font-size: 44px;
-      font-weight: 800;
-      margin-bottom: 5px;
-    }
-
-    .price small {
-      font-size: 16px;
-      color: var(--muted);
-      font-weight: 400;
-    }
-
-    .features {
-      list-style: none;
-      text-align: left;
-      margin: 25px 0;
-    }
-
-    .features li {
-      padding: 11px 0;
-      color: #d7d7dc;
-      border-bottom: 1px solid rgba(255,255,255,.05);
-    }
-
-    .features li:last-child {
-      border-bottom: none;
-    }
-
-    .features li::before {
-      content: "✓";
-      color: var(--orange);
-      font-weight: bold;
-      margin-right: 10px;
-    }
-
-    .button {
-      width: 100%;
-      border: none;
-      border-radius: 14px;
-      padding: 17px 20px;
-      background: linear-gradient(135deg, #ff7b00, #e84d00);
-      color: white;
-      font-size: 17px;
-      font-weight: 800;
-      cursor: pointer;
-      text-decoration: none;
-      display: block;
-      transition: .2s ease;
-      box-shadow: 0 10px 30px rgba(255,106,0,.2);
-    }
-
-    .button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(255,106,0,.3);
-      filter: brightness(1.08);
-    }
-
-    .secure {
-      margin-top: 15px;
-      color: #707079;
-      font-size: 12px;
-    }
-
-    .footer {
-      margin-top: 25px;
-      color: #55555e;
-      font-size: 12px;
-    }
-
-    .footer a {
-      color: #777780;
-      text-decoration: none;
-    }
-
-    @media (max-width: 500px) {
-      body {
-        padding: 15px;
-      }
-
-      .card {
-        padding: 22px;
-      }
-
-      h1 {
-        font-size: 52px;
-      }
-    }
-  </style>
+}
+</style>
 </head>
 
 <body>
 
-  <main class="container">
+<header>
+    <div class="logo">CS2<span>Skins</span></div>
 
-    <div class="logo">🦊</div>
+    <nav>
+        <a href="#cases">Casey</a>
+        <a href="#inventory">Inventář</a>
+    </nav>
 
-    <div class="badge">
-      SOUKROMÁ KOMUNITA
+    <div class="balance">
+        💰 <span id="balance">100</span> Kč
     </div>
+</header>
 
-    <h1>R<span>æ</span>ven</h1>
-
-    <p class="description">
-      Vítej v Ræven. Soukromém prostoru pro naši komunitu.
-      Získej přístup jednoduchým jednorázovým vstupem.
+<section class="hero">
+    <h1>Otevři svůj <span>case.</span></h1>
+    <p>
+        Vyber si case, otevři ho a získej náhodný virtuální kosmetický item.
+        Sbírej svou kolekci v inventáři.
     </p>
+</section>
 
-    <section class="card">
+<main class="container">
 
-      <div class="price">
-        50 Kč
-        <small>/ jednorázově</small>
-      </div>
+<section id="cases">
 
-      <ul class="features">
-        <li>Vstup do soukromé komunity</li>
-        <li>Přístup k obsahu Ræven</li
+<h2 class="section-title">🔥 Case Shop</h2>
+
+<div class="cases">
+
+<div class="case">
+<div class="case-img">📦</div>
+<h3>Starter Case</h3>
+<p>Základní kolekce skinů.</p>
+<div class="price">25 Kč</div>
+<button onclick="openCase(25,'Starter Case')">
+OTEVŘÍT CASE
+</button>
+</div>
+
+<div class="case">
+<div class="case-img">🟠</div>
+<h3>Inferno Case</h3>
+<p>Žhavá kolekce pro odvážné.</p>
+<div class="price">50 Kč</div>
+<button onclick="openCase(50,'Inferno Case')">
+OTEVŘÍT CASE
+</button>
+</div>
+
+<div class="case">
+<div class="case-img">💎</div>
+<h3>Diamond Case</h3>
+<p>Prémiová virtuální kolekce.</p>
+<div class="price">100 Kč</div>
+<button onclick="openCase(100,'Diamond Case')">
+OTEVŘÍT CASE
+</button>
+</div>
+
+<div class="case">
+<div class="case-img">👑</div>
+<h3>Legendary Case</h3>
+<p>Nejvzácnější kosmetické itemy.</p>
+<div class="price">200 Kč</div>
+<button onclick="openCase(200,'Legendary Case')">
+OTEVŘÍT CASE
+</button>
+</div>
+
+</div>
+</section>
+
+<section id="inventory" class="inventory">
+
+<h2 class="section-title">🎒 Inventář</h2>
+
+<div id="inventoryGrid" class="inventory-grid">
+
+<div class="item">
+<div class="item-icon">🎒</div>
+<strong>Inventář je prázdný</strong>
+<br>
+<small>Otevři svůj první case.</small>
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<div id="modal" class="modal">
+
+<div class="modal-box">
+
+<h2 id="caseTitle">Otevírání case...</h2>
+
+<div id="roulette" class="roulette"></div>
+
+<h3 id="result"></h3>
+
+<button class="close" onclick="closeModal()">
+ZAVŘÍT
+</button>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 CS2Skins — Virtual Cosmetic Collection
+</footer>
+
+<script>
+
+let balance = 100;
+
+const skins = [
+    ["🔫","AK-47 | Neon"],
+    ["🔪","Knife | Shadow"],
+    ["🟣","AWP | Pulse"],
+    ["🔵","M4A1-S | Ice"],
+    ["🟡","Desert Eagle | Gold"],
+    ["🔴","USP-S | Fire"],
+    ["🟢","Glock | Emerald"]
+];
+
+function updateBalance(){
+    document.getElementById("balance").textContent = balance;
+}
+
+function openCase(price,name){
+
+    if(balance < price){
+        alert("Nemáš dostatek kreditů.");
+        return;
+    }
+
+    balance -= price;
+    updateBalance();
+
+    document.getElementById("caseTitle").textContent =
+        name + " — otevírání";
+
+    document.getElementById("result").textContent = "";
+
+    const roulette =
+        document.getElementById("roulette");
+
+    roulette.innerHTML = "";
+
+    for(let i=0;i<12;i++){
+
+        const skin =
+            skins[Math.floor(Math.random()*skins.length)];
+
+        const div =
+            document.createElement("div");
+
+        div.className = "roulette-item";
+
+        div.innerHTML =
+            skin[0] +
+            "<span>" +
+            skin[1] +
+            "</span>";
+
+        roulette.appendChild(div);
+    }
+
+    document.getElementById("modal")
+        .classList.add("active");
+
+    setTimeout(()=>{
+
+        const winner =
+            skins[Math.floor(Math.random()*skins.length)];
+
+        document.getElementById("result").innerHTML =
+            "🎉 Získal jsi: <strong>" +
+            winner[1] +
+            "</strong>";
+
+        addInventory(winner);
+
+    },2500);
+}
+
+function addInventory(item){
+
+    const grid =
+        document.getElementById("inventoryGrid");
+
+    const empty =
+        grid.querySelector(".item");
+
+    if(empty &&
+       empty.innerText.includes("Inventář je prázdný")){
+        grid.innerHTML = "";
+    }
+
+    const div =
+        document.createElement("div");
+
+    div.className = "item";
+
+    div.innerHTML =
+        '<div class="item-icon">' +
+        item[0] +
+        '</div>' +
+        '<strong>' +
+        item[1] +
+        '</strong>' +
+        '<br><small>Virtuální item</small>';
+
+    grid.prepend(div);
+}
+
+function closeModal(){
+
+    document.getElementById("modal")
+        .classList.remove("active");
+}
+
+updateBalance();
+
+</script>
+
+</body>
+</html>
