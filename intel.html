@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Ræven — Vstup</title>
+
+  <meta
+    name="description"
+    content="Ræven — soukromá komunita. Získej přístup za 50 Kč."
+  >
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg: #07070a;
+      --card: #111116;
+      --orange: #ff6a00;
+      --orange-light: #ff9a3d;
+      --text: #ffffff;
+      --muted: #9999a3;
+      --border: rgba(255,255,255,.08);
+    }
+
+    body {
+      min-height: 100vh;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(255,106,0,.15), transparent 35%),
+        radial-gradient(circle at 80% 80%, rgba(116,0,255,.08), transparent 30%),
+        var(--bg);
+      color: var(--text);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 25px;
+      overflow-x: hidden;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 520px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 110px;
+      height: 110px;
+      margin: 0 auto 25px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      background:
+        linear-gradient(145deg, #ff7a00, #c63f00);
+
+      box-shadow:
+        0 0 40px rgba(255,106,0,.25),
+        inset 0 0 25px rgba(0,0,0,.25);
+
+      font-size: 55px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,106,0,.3);
+      background: rgba(255,106,0,.08);
+      color: var(--orange-light);
+      border-radius: 999px;
+      font-size: 13px;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: clamp(42px, 12vw, 72px);
+      line-height: .95;
+      letter-spacing: -3px;
+      margin-bottom: 18px;
+    }
+
+    h1 span {
+      color: var(--orange);
+    }
+
+    .description {
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+      max-width: 430px;
+      margin: 0 auto 30px;
+    }
+
+    .card {
+      background: rgba(17,17,22,.86);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 25px 80px rgba(0,0,0,.45);
+    }
+
+    .price {
+      font-size: 44px;
+      font-weight: 800;
+      margin-bottom: 5px;
+    }
+
+    .price small {
+      font-size: 16px;
+      color: var(--muted);
+      font-weight: 400;
+    }
+
+    .features {
+      list-style: none;
+      text-align: left;
+      margin: 25px 0;
+    }
+
+    .features li {
+      padding: 11px 0;
+      color: #d7d7dc;
+      border-bottom: 1px solid rgba(255,255,255,.05);
+    }
+
+    .features li:last-child {
+      border-bottom: none;
+    }
+
+    .features li::before {
+      content: "✓";
+      color: var(--orange);
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .button {
+      width: 100%;
+      border: none;
+      border-radius: 14px;
+      padding: 17px 20px;
+      background: linear-gradient(135deg, #ff7b00, #e84d00);
+      color: white;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      transition: .2s ease;
+      box-shadow: 0 10px 30px rgba(255,106,0,.2);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 40px rgba(255,106,0,.3);
+      filter: brightness(1.08);
+    }
+
+    .secure {
+      margin-top: 15px;
+      color: #707079;
+      font-size: 12px;
+    }
+
+    .footer {
+      margin-top: 25px;
+      color: #55555e;
+      font-size: 12px;
+    }
+
+    .footer a {
+      color: #777780;
+      text-decoration: none;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 15px;
+      }
+
+      .card {
+        padding: 22px;
+      }
+
+      h1 {
+        font-size: 52px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="container">
+
+    <div class="logo">🦊</div>
+
+    <div class="badge">
+      SOUKROMÁ KOMUNITA
+    </div>
+
+    <h1>R<span>æ</span>ven</h1>
+
+    <p class="description">
+      Vítej v Ræven. Soukromém prostoru pro naši komunitu.
+      Získej přístup jednoduchým jednorázovým vstupem.
+    </p>
+
+    <section class="card">
+
+      <div class="price">
+        50 Kč
+        <small>/ jednorázově</small>
+      </div>
+
+      <ul class="features">
+        <li>Vstup do soukromé komunity</li>
+        <li>Přístup k obsahu Ræven</li
