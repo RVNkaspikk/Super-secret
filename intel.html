@@ -2,93 +2,72 @@
 <html lang="cs">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>CS2Skins — Case Shop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS2Skins</title>
 
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 
 body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#07090d;
+    background:#080a0f;
     color:#fff;
-    min-height:100vh;
+    font-family:Arial,sans-serif;
 }
 
 header{
-    height:72px;
+    height:70px;
+    background:#10131a;
+    border-bottom:1px solid #252a33;
     display:flex;
     align-items:center;
     justify-content:space-between;
     padding:0 6%;
-    background:#0c0f15;
-    border-bottom:1px solid #20242c;
     position:sticky;
     top:0;
-    z-index:10;
+    z-index:20;
 }
 
 .logo{
     font-size:25px;
     font-weight:900;
-    letter-spacing:-1px;
 }
 
-.logo span{color:#ff8a00}
-
-nav{
-    display:flex;
-    gap:25px;
-}
-
-nav a{
-    color:#aaa;
-    text-decoration:none;
-    font-size:14px;
-}
-
-nav a:hover{color:white}
+.logo span{color:#ff8700}
 
 .balance{
-    background:#151a22;
-    border:1px solid #292f39;
-    padding:10px 15px;
-    border-radius:9px;
-    color:#ffb347;
+    background:#181d25;
+    padding:10px 16px;
+    border-radius:8px;
+    color:#ffad45;
     font-weight:bold;
 }
 
 .hero{
-    padding:70px 6% 35px;
     text-align:center;
+    padding:75px 20px 45px;
     background:
-        radial-gradient(circle at center,
-        rgba(255,128,0,.14),
-        transparent 45%);
+    radial-gradient(circle,#402000 0%,transparent 45%);
 }
 
 .hero h1{
-    font-size:clamp(40px,7vw,75px);
+    font-size:60px;
     margin-bottom:15px;
 }
 
-.hero h1 span{color:#ff8500}
+.hero h1 span{color:#ff8700}
 
 .hero p{
-    color:#888f9b;
-    max-width:600px;
-    margin:auto;
-    line-height:1.6;
+    color:#8b929e;
 }
 
 .container{
-    width:88%;
+    width:90%;
     max-width:1200px;
-    margin:40px auto;
+    margin:35px auto;
 }
 
-.section-title{
-    font-size:24px;
+.title{
+    font-size:25px;
     margin-bottom:20px;
 }
 
@@ -99,29 +78,25 @@ nav a:hover{color:white}
 }
 
 .case{
-    background:linear-gradient(145deg,#11161e,#0c1016);
-    border:1px solid #252c37;
-    border-radius:15px;
-    padding:20px;
+    background:#11151d;
+    border:1px solid #272d38;
+    border-radius:14px;
+    padding:22px;
     text-align:center;
-    transition:.25s;
+    transition:.2s;
 }
 
 .case:hover{
     transform:translateY(-5px);
-    border-color:#ff8500;
-    box-shadow:0 15px 40px rgba(255,120,0,.1);
+    border-color:#ff8700;
 }
 
-.case-img{
-    height:170px;
+.case-icon{
+    font-size:85px;
+    height:140px;
     display:flex;
     justify-content:center;
     align-items:center;
-    font-size:90px;
-    background:
-        radial-gradient(circle,#252b35,transparent 65%);
-    margin-bottom:15px;
 }
 
 .case h3{
@@ -129,47 +104,47 @@ nav a:hover{color:white}
 }
 
 .case p{
-    color:#777f8c;
+    color:#737b87;
     font-size:13px;
     margin-bottom:15px;
 }
 
 .price{
-    color:#ffad4d;
+    color:#ffad45;
     font-weight:bold;
-    margin-bottom:14px;
+    margin-bottom:12px;
 }
 
 button{
-    border:0;
-    cursor:pointer;
-    color:white;
-    background:linear-gradient(135deg,#ff9700,#e55d00);
-    padding:12px 20px;
-    border-radius:8px;
-    font-weight:bold;
     width:100%;
+    border:0;
+    border-radius:8px;
+    padding:13px;
+    background:linear-gradient(135deg,#ff9700,#e65b00);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
 }
 
 button:hover{
-    filter:brightness(1.12);
+    filter:brightness(1.15);
 }
 
 .inventory{
-    margin-top:70px;
+    margin-top:65px;
 }
 
 .inventory-grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(170px,1fr));
     gap:15px;
 }
 
 .item{
-    background:#10141b;
-    border:1px solid #252b34;
-    padding:18px;
-    border-radius:12px;
+    background:#11151d;
+    border:1px solid #292f39;
+    border-radius:10px;
+    padding:20px;
     text-align:center;
 }
 
@@ -179,24 +154,26 @@ button:hover{
 }
 
 .item small{
-    color:#737b88;
+    color:#727986;
 }
 
 .modal{
     position:fixed;
     inset:0;
-    background:rgba(0,0,0,.82);
+    background:rgba(0,0,0,.85);
     display:none;
-    align-items:center;
     justify-content:center;
-    z-index:50;
+    align-items:center;
+    z-index:100;
 }
 
-.modal.active{display:flex}
+.modal.show{
+    display:flex;
+}
 
 .modal-box{
-    width:min(700px,92%);
-    background:#10141b;
+    width:min(750px,92%);
+    background:#11151d;
     border:1px solid #303744;
     border-radius:18px;
     padding:25px;
@@ -204,59 +181,49 @@ button:hover{
 }
 
 .roulette{
-    height:150px;
-    overflow:hidden;
     display:flex;
-    align-items:center;
-    gap:15px;
+    gap:12px;
+    overflow:hidden;
+    background:#080a0f;
     padding:20px;
-    margin:20px 0;
-    background:#080b10;
-    border-radius:12px;
+    margin:25px 0;
+    border-radius:10px;
 }
 
-.roulette-item{
-    min-width:130px;
-    height:105px;
-    background:#171d26;
-    border:1px solid #343c49;
-    border-radius:9px;
+.roll-item{
+    min-width:120px;
+    height:100px;
+    background:#191e27;
+    border:1px solid #303743;
+    border-radius:8px;
     display:flex;
     flex-direction:column;
-    justify-content:center;
     align-items:center;
-    font-size:42px;
+    justify-content:center;
+    font-size:40px;
 }
 
-.roulette-item span{
+.roll-item span{
     font-size:11px;
     color:#aaa;
     margin-top:5px;
 }
 
 .close{
-    background:#292f39;
-    margin-top:10px;
+    background:#292f38;
+    margin-top:15px;
 }
 
 footer{
     margin-top:80px;
     padding:30px;
     text-align:center;
-    color:#555d68;
-    border-top:1px solid #1d222a;
+    color:#555c68;
 }
 
-@media(max-width:700px){
-    nav{display:none}
-
-    header{
-        padding:0 20px;
-    }
-
-    .container{
-        width:92%;
-    }
+@media(max-width:600px){
+    .hero h1{font-size:43px}
+    header{padding:0 20px}
 }
 </style>
 </head>
@@ -264,91 +231,80 @@ footer{
 <body>
 
 <header>
-    <div class="logo">CS2<span>Skins</span></div>
 
-    <nav>
-        <a href="#cases">Casey</a>
-        <a href="#inventory">Inventář</a>
-    </nav>
+<div class="logo">
+CS2<span>Skins</span>
+</div>
 
-    <div class="balance">
-        💰 <span id="balance">100</span> Kč
-    </div>
+<div class="balance">
+💰 <span id="balance">100</span> Kč
+</div>
+
 </header>
 
 <section class="hero">
-    <h1>Otevři svůj <span>case.</span></h1>
-    <p>
-        Vyber si case, otevři ho a získej náhodný virtuální kosmetický item.
-        Sbírej svou kolekci v inventáři.
-    </p>
+
+<h1>CS2<span>Skins</span></h1>
+
+<p>
+Otevři case a rozšiř svou virtuální kolekci.
+</p>
+
 </section>
 
 <main class="container">
 
-<section id="cases">
-
-<h2 class="section-title">🔥 Case Shop</h2>
+<h2 class="title">🔥 Case Shop</h2>
 
 <div class="cases">
 
 <div class="case">
-<div class="case-img">📦</div>
+<div class="case-icon">📦</div>
 <h3>Starter Case</h3>
-<p>Základní kolekce skinů.</p>
+<p>Základní kolekce</p>
 <div class="price">25 Kč</div>
 <button onclick="openCase(25,'Starter Case')">
-OTEVŘÍT CASE
+OTEVŘÍT
 </button>
 </div>
 
 <div class="case">
-<div class="case-img">🟠</div>
+<div class="case-icon">🟠</div>
 <h3>Inferno Case</h3>
-<p>Žhavá kolekce pro odvážné.</p>
+<p>Žhavá kolekce</p>
 <div class="price">50 Kč</div>
 <button onclick="openCase(50,'Inferno Case')">
-OTEVŘÍT CASE
+OTEVŘÍT
 </button>
 </div>
 
 <div class="case">
-<div class="case-img">💎</div>
+<div class="case-icon">💎</div>
 <h3>Diamond Case</h3>
-<p>Prémiová virtuální kolekce.</p>
+<p>Prémiová kolekce</p>
 <div class="price">100 Kč</div>
 <button onclick="openCase(100,'Diamond Case')">
-OTEVŘÍT CASE
+OTEVŘÍT
 </button>
 </div>
 
 <div class="case">
-<div class="case-img">👑</div>
+<div class="case-icon">👑</div>
 <h3>Legendary Case</h3>
-<p>Nejvzácnější kosmetické itemy.</p>
+<p>Legendární kolekce</p>
 <div class="price">200 Kč</div>
 <button onclick="openCase(200,'Legendary Case')">
-OTEVŘÍT CASE
+OTEVŘÍT
 </button>
 </div>
 
 </div>
-</section>
 
-<section id="inventory" class="inventory">
+<section class="inventory">
 
-<h2 class="section-title">🎒 Inventář</h2>
+<h2 class="title">🎒 Inventář</h2>
 
-<div id="inventoryGrid" class="inventory-grid">
-
-<div class="item">
-<div class="item-icon">🎒</div>
-<strong>Inventář je prázdný</strong>
-<br>
-<small>Otevři svůj první case.</small>
-</div>
-
-</div>
+<div id="inventory" class="inventory-grid"></div>
 
 </section>
 
@@ -358,11 +314,13 @@ OTEVŘÍT CASE
 
 <div class="modal-box">
 
-<h2 id="caseTitle">Otevírání case...</h2>
+<h2 id="modalTitle">
+Otevírání...
+</h2>
 
 <div id="roulette" class="roulette"></div>
 
-<h3 id="result"></h3>
+<h2 id="result"></h2>
 
 <button class="close" onclick="closeModal()">
 ZAVŘÍT
@@ -373,121 +331,189 @@ ZAVŘÍT
 </div>
 
 <footer>
-© 2026 CS2Skins — Virtual Cosmetic Collection
+CS2Skins © 2026
 </footer>
 
 <script>
 
-let balance = 100;
+let balance =
+Number(localStorage.getItem("balance")) || 100;
+
+let inventory =
+JSON.parse(localStorage.getItem("inventory") || "[]");
 
 const skins = [
-    ["🔫","AK-47 | Neon"],
-    ["🔪","Knife | Shadow"],
-    ["🟣","AWP | Pulse"],
-    ["🔵","M4A1-S | Ice"],
-    ["🟡","Desert Eagle | Gold"],
-    ["🔴","USP-S | Fire"],
-    ["🟢","Glock | Emerald"]
+
+["🔫","AK-47 | Neon"],
+["🔪","Knife | Shadow"],
+["🟣","AWP | Pulse"],
+["🔵","M4A1-S | Ice"],
+["🟡","Deagle | Gold"],
+["🔴","USP-S | Fire"],
+["🟢","Glock | Emerald"]
+
 ];
 
-function updateBalance(){
-    document.getElementById("balance").textContent = balance;
+function update(){
+
+document.getElementById("balance")
+.innerText=balance;
+
+localStorage.setItem(
+"balance",
+balance
+);
+
+renderInventory();
+
+}
+
+function renderInventory(){
+
+const box =
+document.getElementById("inventory");
+
+box.innerHTML="";
+
+if(inventory.length===0){
+
+box.innerHTML=`
+<div class="item">
+<div class="item-icon">🎒</div>
+<strong>Inventář je prázdný</strong>
+<br>
+<small>Otevři svůj první case.</small>
+</div>`;
+
+return;
+
+}
+
+inventory.forEach(item=>{
+
+box.innerHTML+=`
+
+<div class="item">
+
+<div class="item-icon">
+${item.icon}
+</div>
+
+<strong>
+${item.name}
+</strong>
+
+<br>
+
+<small>
+Virtuální item
+</small>
+
+</div>
+
+`;
+
+});
+
 }
 
 function openCase(price,name){
 
-    if(balance < price){
-        alert("Nemáš dostatek kreditů.");
-        return;
-    }
+if(balance < price){
 
-    balance -= price;
-    updateBalance();
+alert("Nemáš dostatek kreditů.");
 
-    document.getElementById("caseTitle").textContent =
-        name + " — otevírání";
+return;
 
-    document.getElementById("result").textContent = "";
-
-    const roulette =
-        document.getElementById("roulette");
-
-    roulette.innerHTML = "";
-
-    for(let i=0;i<12;i++){
-
-        const skin =
-            skins[Math.floor(Math.random()*skins.length)];
-
-        const div =
-            document.createElement("div");
-
-        div.className = "roulette-item";
-
-        div.innerHTML =
-            skin[0] +
-            "<span>" +
-            skin[1] +
-            "</span>";
-
-        roulette.appendChild(div);
-    }
-
-    document.getElementById("modal")
-        .classList.add("active");
-
-    setTimeout(()=>{
-
-        const winner =
-            skins[Math.floor(Math.random()*skins.length)];
-
-        document.getElementById("result").innerHTML =
-            "🎉 Získal jsi: <strong>" +
-            winner[1] +
-            "</strong>";
-
-        addInventory(winner);
-
-    },2500);
 }
 
-function addInventory(item){
+balance-=price;
 
-    const grid =
-        document.getElementById("inventoryGrid");
+update();
 
-    const empty =
-        grid.querySelector(".item");
+document
+.getElementById("modal")
+.classList.add("show");
 
-    if(empty &&
-       empty.innerText.includes("Inventář je prázdný")){
-        grid.innerHTML = "";
-    }
+document
+.getElementById("modalTitle")
+.innerText=
+name+" — otevírání";
 
-    const div =
-        document.createElement("div");
+document
+.getElementById("result")
+.innerText="";
 
-    div.className = "item";
+const roulette =
+document.getElementById("roulette");
 
-    div.innerHTML =
-        '<div class="item-icon">' +
-        item[0] +
-        '</div>' +
-        '<strong>' +
-        item[1] +
-        '</strong>' +
-        '<br><small>Virtuální item</small>';
+roulette.innerHTML="";
 
-    grid.prepend(div);
+for(let i=0;i<15;i++){
+
+const skin =
+skins[
+Math.floor(
+Math.random()*skins.length
+)
+];
+
+roulette.innerHTML+=`
+
+<div class="roll-item">
+
+${skin[0]}
+
+<span>
+${skin[1]}
+</span>
+
+</div>
+
+`;
+
+}
+
+setTimeout(()=>{
+
+const winner =
+skins[
+Math.floor(
+Math.random()*skins.length
+)
+];
+
+document
+.getElementById("result")
+.innerHTML=
+"🎉 Získal jsi: "+
+winner[1];
+
+inventory.unshift({
+icon:winner[0],
+name:winner[1]
+});
+
+localStorage.setItem(
+"inventory",
+JSON.stringify(inventory)
+);
+
+renderInventory();
+
+},2200);
+
 }
 
 function closeModal(){
 
-    document.getElementById("modal")
-        .classList.remove("active");
+document
+.getElementById("modal")
+.classList.remove("show");
+
 }
 
-updateBalance();
+update();
 
 </script>
 
